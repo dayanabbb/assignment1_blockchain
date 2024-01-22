@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare dApp</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+    <h2>Healthcare dApp</h2>
+    <div class="form-group">
+        <label for="from">From:</label>
+        <input type="text" class="form-control" id="from" placeholder="Sender">
+    </div>
+    <div class="form-group">
+        <label for="to">To:</label>
+        <input type="text" class="form-control" id="to" placeholder="Recipient">
+    </div>
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="text" class="form-control" id="amount" placeholder="Amount">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="createTransaction()">Create Transaction</button>
+    <button type="button" class="btn btn-success" onclick="mineBlock()">Mine Block</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script>
+    function createTransaction() {
+        const from = document.getElementById('from').value;
+        const to = document.getElementById('to').value;
+        const amount = document.getElementById('amount').value;
+
+        axios.post('/createTransaction', { from, to, amount })
+        .then(response => {
+            alert(response.data.message);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+
+    function mineBlock() {
+        axios.get('/mineBlock')
+            .then(response => {
+                alert(response.data.message);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+</script>
+</body>
+</html>
